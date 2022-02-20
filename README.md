@@ -1,5 +1,7 @@
 # Knitty
 
+This is the Arduino firmware of knitty software to drive knitting machines needles. There is a separate [repository for the Windows/Linux GUI](https://github.com/sietchcode/knitty_gui_ubuntu_21_10_update)
+
 ## Interface
 
 ## Superba/Singer 624/9000/Memo II
