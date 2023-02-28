@@ -85,11 +85,10 @@ void executeCommand(unsigned char cmd, String payload) {
       for(unsigned char i = 0; i < patternLength; i++) {
         knitPattern[i] = (payload.charAt(i) == '1')? 1 : 0;
       }
-
       break;
 
     case COM_CMD_CURSOR:
-      currentCursorPosition = payload.toInt();
+      currentCursorPosition = payload.toInt()-8; // -8 for another memo II
       break;
   }
 }
@@ -185,7 +184,7 @@ void interruptPinChangeEncoder() {
   if((currentDirection == DIRECTION_RIGHT_LEFT && currentCursorPosition > 0) ||
     (currentDirection == DIRECTION_LEFT_RIGHT && currentCursorPosition <= leftEndCursorPosition)) {
 
-    if(currentPatternIndex > patternLength) {
+    if(currentPatternIndex > patternLength-1) {
 
       setNeedle(0);
       currentPatternIndex = 0;
@@ -196,7 +195,7 @@ void interruptPinChangeEncoder() {
       // Remember last cursor position to begin for the opposite direction
       if(currentDirection == DIRECTION_RIGHT_LEFT) {
         //cursor position differs from RTL to LTR
-        leftEndCursorPosition = currentCursorPosition-5;
+        leftEndCursorPosition = currentCursorPosition-4; // adapted for another memo II
       }
 
     } else {
@@ -233,5 +232,3 @@ void interruptPinChangeIfdr() {
     sendCommand(COM_CMD_IFDR, "1");
   }
 }
-
-
